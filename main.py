@@ -1,43 +1,89 @@
-import json, requests
+class Vehicle:
+    """A class representing any type of vehicle"""
 
-base_url = "https://api.openweathermap.org/data/2.5/weather"
-appid = "e14d849bcdb2f061967f170f841733bd"
+    def SetVehicleMake(self, make):
+        """Input make of vehicle"""
+        self.make = make
 
-def main():
-  city = input("\nPlease enter a city or zipcode: ")
+    def SetVehicleModel(self, model):
+        """Input model of vehicle"""
+        self.model = model
 
-  url = f"{base_url}?q={city}&units=imperial&APPID={appid}"
-  print(url)
-  print ()
+    def GetVehicleMake(self):
+        """Print out make of vehicle"""
+        print(f"\nThe make of the vehicle is a {self.make}.")
 
-  response = requests.get(url)
-  unformatted_data = response.json()
+    def GetVehicleModel(self):
+        """Print out model of vehicle"""
+        print(f"The model of the vehicle is a {self.model}.")
 
-  unformatted_data = response.json()
+class Car(Vehicle):
+    """Represent aspects of a vehicle, specific to cars"""
 
-  def get_temp():
-    try:
-      temp = unformatted_data["main"]["temp"]
-      print(f"The current temp is: {temp}")
+    def SetCarDoor(self, doors):
+        """Set number of doors a car has."""
 
-      temp_max = unformatted_data["main"]["temp_max"]
-      print(f"The max temp is: {temp_max}")
+        self.car_door = doors
 
-    except Exception:
-      print(f"{city} is not a valid city or zipcode. Please try again.")
+    def GetCarDoor(self):
+        """Print number of doors car has."""
+
+        print(f"A {self.make} {self.model} has {self.car_door} doors.")
+
+class Truck(Vehicle):
+    """Represent aspects of a vehicle, specific to trucks."""
+
+    def SetBedLength(self, length):
+        """Set length of truck bed."""
+
+        self.bed_length = length
+
+    def GetBedLength(self):
+        """Print length of truck bed."""
+
+        print(f"A {self.make} {self.model} has a bed length of {self.bed_length}.")
 
 
-  get_temp()
+print("Welcome to the Virtual Garage")
 
-main()
+while True: 
+  option = input("\nPlease press 1 to make a car, 2 to make a truck, or 3 to quit: ")
 
-active = True
-while active:
-  message = input("Would you like to run again? y/n: ")
 
-  if message == 'n':
-    active = False
-    print("\nThank you for using openweather.org")
-  else: 
-    main()
+  if option == '1':
+    input_make = input("Please enter your car make: ")
+    input_model = input("Please enter your car model: ")
+    input_drs = input("Please enter the number of doors: ")
+    new_car = Car()
+    new_car.SetVehicleMake(input_make)
+    new_car.SetVehicleModel(input_model)
+    new_car.SetCarDoor(input_drs)
+    new_car.GetVehicleMake()
+    new_car.GetVehicleModel()
+    new_car.GetCarDoor()
+    print("Your car has been added to the Garage.")
 
+  elif option == '2':
+    input_make = input("Please enter your truck make: ")
+    input_model = input("Please enter your truck model: ")
+    input_bed_length = input("Please enter the length of the truck bed: ")
+    new_truck = Truck()
+    new_truck.SetVehicleMake(input_make)
+    new_truck.SetVehicleModel(input_model)
+    new_truck.SetBedLength(input_bed_length)
+    new_truck.GetVehicleMake()
+    new_truck.GetVehicleModel()
+    new_truck.GetBedLength()
+    print("Your truck has been added to the garage.")
+
+  else:
+    print("Thank you for trying out the Virtual Garage!")
+    break
+
+
+      
+
+
+
+
+        
